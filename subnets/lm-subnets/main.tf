@@ -7,5 +7,5 @@ resource "aws_subnet" "main" {
 }
 
 output "subnets" {
-  value = "aws_subnet.main"
+  value = aws_subnet.main
 }
