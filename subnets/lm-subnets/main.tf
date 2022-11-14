@@ -6,3 +6,6 @@ resource "aws_subnet" "main" {
   availability_zone = element(var.subnet_availability_zones, count.index)
 }
 
+output "subnets" {
+  value = "aws_subnet.main"
+}
