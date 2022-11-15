@@ -19,17 +19,21 @@ resource "aws_route_table" "aws_route_table" {
   }
 }
 
-resource "aws_route" "peering_connection_route" {
-  for_each = var.subnets
-  route_table_id = lookup(lookup(aws_route_table.aws_route_table, each.value.name, null), "id", null)
-  destination_cidr_block = lookup(var.management_vpc, "vpc_cidr", null)
-  vpc_peering_connection_id = var.peering_connection_id
-}
+//resource "aws_route" "peering_connection_route" {
+//  for_each = var.subnets
+//  route_table_id = lookup(lookup(aws_route_table.aws_route_table, each.value.name, null), "id", null)
+//  destination_cidr_block = lookup(var.management_vpc, "vpc_cidr", null)
+//  vpc_peering_connection_id = var.peering_connection_id
+//}
 
-locals {
-  subnets_list = flatten([for i, j in module.lm-subnets : j.subnets])
-}
+//locals {
+  //subnets_list = flatten([for i, j in module.lm-subnets : j.subnets])
+//}
 
-output "subnets" {
-  value = local.subnets_list[*].id
+//output "subnets" {
+//  value = local.subnets_list[*].id
+//}
+
+output "rt" {
+  value = [for i, j in aws_route_table.aws_route_table : j.id]
 }
