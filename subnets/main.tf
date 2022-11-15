@@ -31,7 +31,7 @@ locals {
 }
 
 output "subnets_list" {
-  value = local.subnets_list[0].id
+  value = local.subnets_list[*].id
 }
 
 output "rt" {
