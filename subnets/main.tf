@@ -26,13 +26,13 @@ resource "aws_route" "peering_connection_route" {
   vpc_peering_connection_id = var.peering_connection_id
 }
 
-locals {
-  subnets_list = flatten([for i, j in module.lm-subnets : j.subnets])
-}
+//locals {
+  //subnets_list = flatten([for i, j in module.lm-subnets : j.subnets])
+//}
 
-output "subnets_list" {
-  value = local.subnets_list[*].id
-}
+//output "subnets_list" {
+//  value = local.subnets_list[0].id
+//}
 
 output "rt" {
   value = [for i, j in aws_route_table.aws_route_table : j.id]
