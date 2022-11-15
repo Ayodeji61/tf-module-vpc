@@ -12,3 +12,6 @@ resource "aws_route_table_association" "route-table-association" {
   route_table_id = var.route_table_id
 }
 
+output "subnets" {
+  value = "aws_subnet.main"
+}
