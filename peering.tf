@@ -9,7 +9,7 @@ resource "aws_vpc_peering_connection" "management-vpc-to-env-vpc" {
 
 
 resource "aws_route" "route_to_default_management_route_table" {
-  count                     = local.all_route_tables
+  count                     = length(local.all_route_tables)
   route_table_id            = element(local.all_route_tables, count.index)
   destination_cidr_block    = lookup(var.management_vpc, "vpc_cidr", null )
   vpc_peering_connection_id = aws_vpc_peering_connection.management-vpc-to-env-vpc.id
