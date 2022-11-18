@@ -1,3 +1,4 @@
+/*
 resource "aws_internet_gateway" "gw" {
   count = length(local.vpc_ids)
   vpc_id = element(local.vpc_ids, count.index)
@@ -42,4 +43,4 @@ resource "aws_route" "internet_gateway_route_to_private_subnets" {
   destination_cidr_block    = "0.0.0.0/0"
   gateway_id = aws_nat_gateway.ngw[0].id
 }
-
+*/

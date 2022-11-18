@@ -1,4 +1,5 @@
-module "public_subnets" {
+/*
+odule "public_subnets" {
   for_each = var.vpc
   source = "./subnets"
   subnets = each.value.public_subnets
@@ -22,4 +23,5 @@ module "private_subnets" {
   internet_gateway_id      = aws_internet_gateway.gw.*.id[0]
 }
 
+*/
 
