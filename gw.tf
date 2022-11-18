@@ -11,16 +11,17 @@ resource "aws_eip" "ngw" {
   vpc = true
 }
 
-/*
+
 resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.ngw.id
-  subnet_id = local.public_subnets_list[0]
+  subnet_id = lookup(module.public_subnets, "public", null)[0].id
 
   tags = {
     Name = "NAT GW"
   }
 }
 
+/*
 
 locals {
   private_route_tables = flatten([for i, j in module.private_subnets : j.rt])
