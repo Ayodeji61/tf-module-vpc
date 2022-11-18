@@ -11,16 +11,6 @@ module "lm-subnets" {
 }
 */
 
-/*
-
-resource "aws_route" "peering_connection_route" {
-  for_each = var.subnets
-  route_table_id = lookup(lookup(aws_route_table.aws_route_table, each.value.name, null), "id", null)
-  destination_cidr_block = lookup(var.management_vpc, "vpc_cidr", null)
-  vpc_peering_connection_id = var.peering_connection_id
-}
-
-*/
 
 
 resource "aws_subnet" "main" {
@@ -45,4 +35,10 @@ resource "aws_route_table_association" "route-table-association" {
   count = length(aws_subnet.main)
   subnet_id = element(aws_subnet.main.*.id, count.index)
   route_table_id = aws_route_table.aws_route_table.id
+}
+
+resource "aws_route" "internet_gateway_route" {
+  route_table_id = aws_route_table.aws_route_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = var.gateway_id
 }
