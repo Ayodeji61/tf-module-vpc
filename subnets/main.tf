@@ -1,18 +1,3 @@
-/*
-module "lm-subnets" {
-  for_each = var.subnets
-  cidr_block = each.value.cidr_block
-  source = "./lm-subnets"
-  vpc_id = var.vpc_id[0]
-  env = var.env
-  name = each.value.name
-  subnet_availability_zones = var.subnet_availability_zones
- route_table_id = lookup(lookup(aws_route_table.aws_route_table, each.value.name, null), "id", null)
-}
-*/
-
-
-
 resource "aws_subnet" "main" {
   count = length(var.cidr_block)
   vpc_id = var.vpc_id
@@ -41,4 +26,9 @@ resource "aws_route" "internet_gateway_route" {
   route_table_id = aws_route_table.aws_route_table.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id = var.gateway_id
+  lifecycle {
+    ignore_changes = [
+      gateway_id
+    ]
+  }
 }
