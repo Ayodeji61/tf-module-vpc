@@ -1,4 +1,3 @@
-
 module "private_subnets" {
   for_each = var.private_subnets
   source = "./subnets"
